@@ -1,0 +1,19 @@
+version: '3'
+services:
+    app1:
+        image: nicopaez/password-api
+        ports:
+            - "3000"
+    app2:
+        image: nicopaez/password-api
+        ports:
+            - "3000"
+    nginx:
+        image: nginx:latest
+        volumes:
+            - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+        depends_on:
+            - app1
+            - app2
+        ports:
+          - "8080:80"
